@@ -5,8 +5,6 @@ export default function KanbanColumn({ title, status }) {
   const tasks = useTaskStore((state) => state.tasks);
   const updateTask = useTaskStore((state) => state.updateTask);
   const draggingTaskId = useTaskStore((state) => state.draggingTaskId);
-
-  // Filter tasks for this column
   const filteredTasks = tasks.filter((t) => t.status === status);
 
   return (

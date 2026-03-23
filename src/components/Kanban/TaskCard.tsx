@@ -1,6 +1,4 @@
 import { useTaskStore } from "../../store/useTaskStore";
-
-// ✅ Task Type
 type Task = {
   id: string;
   title: string;
@@ -9,8 +7,6 @@ type Task = {
   assignee: string;
   dueDate: string;
 };
-
-// ✅ Props Type
 type Props = {
   task: Task;
   view?: "kanban" | "list" | "gantt";
@@ -22,8 +18,6 @@ export default function TaskCard({ task, view = "kanban" }: Props) {
   const draggingTaskId = useTaskStore((s) => s.draggingTaskId);
 
   const isDragging = draggingTaskId === task.id;
-
-  // ✅ Due Date Formatter
   const formatDueDate = (date: string): string => {
     const today = new Date();
     const due = new Date(date);
@@ -45,17 +39,14 @@ export default function TaskCard({ task, view = "kanban" }: Props) {
   };
 
   const isOverdue = new Date(task.dueDate) < new Date();
-
-  // ✅ Get initials for assignee
   const getInitials = (name: string) => {
     return name
       .split(" ")
       .map((n) => n[0].toUpperCase())
       .join("")
-      .slice(0, 2); // max 2 letters
+      .slice(0, 2); 
   };
 
-  // ✅ Priority Colors
   const priorityColors: Record<Task["priority"], string> = {
     critical: "bg-red-500 text-white",
     high: "bg-orange-500 text-white",
@@ -92,14 +83,13 @@ export default function TaskCard({ task, view = "kanban" }: Props) {
             {task.priority}
           </span>
 
-          {/* Due Date */}
           <span className={`text-xs ${isOverdue ? "text-red-500 font-medium" : "text-gray-500"}`}>
             {formatDueDate(task.dueDate)}
           </span>
         </div>
       )}
 
-      {/* 🔹 Detailed View */}
+     
       {view !== "kanban" && (
         <>
           <div className="flex justify-between items-center mt-3">

@@ -11,7 +11,6 @@ export default function ListView() {
 
   const [searchParams] = useSearchParams();
 
-  // ✅ FILTER LOGIC
   const filteredTasks = tasks.filter((task) => {
     const status = searchParams.getAll("status");
     const priority = searchParams.getAll("priority");
@@ -27,8 +26,6 @@ export default function ListView() {
   const [scrollTop, setScrollTop] = useState(0);
   const [sortBy, setSortBy] = useState(null);
   const [direction, setDirection] = useState("asc");
-
-  // ✅ SORTING (FIXED)
   const sortedTasks = [...filteredTasks].sort((a, b) => {
     if (!sortBy) return 0;
 
@@ -57,14 +54,11 @@ export default function ListView() {
       ? valA.localeCompare(valB)
       : valB.localeCompare(valA);
   });
-
-  // ✅ VIRTUAL SCROLL
   const startIndex = Math.max(0, Math.floor(scrollTop / ROW_HEIGHT) - BUFFER);
   const endIndex = startIndex + 12;
 
   const visibleTasks = sortedTasks.slice(startIndex, endIndex);
 
-  // ✅ SORT HANDLER
   const handleSort = (field) => {
     if (sortBy === field) {
       setDirection(direction === "asc" ? "desc" : "asc");
