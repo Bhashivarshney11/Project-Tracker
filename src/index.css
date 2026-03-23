@@ -1,0 +1,8 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* your existing code below */
+:root {
+  --text: #6b6375;
+}
